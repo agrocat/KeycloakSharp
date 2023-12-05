@@ -10,6 +10,12 @@ namespace KeycloakIntegration.Classes
 			set => base.RefreshToken = value;
 		}
 
+		// Property created for json parsing issues
+		public string? refresh_token { 
+			get => RefreshToken; 
+			set => RefreshToken = value; 
+		}
+
 		public RefreshRequest()
 		{
 			GrantType = "refresh_token";
