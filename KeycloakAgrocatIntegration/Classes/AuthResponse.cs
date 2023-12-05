@@ -21,8 +21,6 @@ namespace KeycloakIntegration
         public DateTime AccessExpirationDate { get => IssueDate.AddSeconds(Expires_in); }
         public DateTime RefreshExpirationDate { get => IssueDate.AddSeconds(Refresh_expires_in); }
 
-        public string? TokenType { get; set; }
-
     }
 }
 
