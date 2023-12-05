@@ -47,14 +47,14 @@ namespace KeycloakTester.Controllers
         public IActionResult Login([FromBody] LoginRequest request)
         {
             try { return Ok(auth.Login(request)); }
-            catch(Exception) { throw; }
+            catch(Exception) { return StatusCode(500, "Error ocurred logging in"); }
         }
 
         [HttpPost("refresh")]
         public IActionResult Refresh([FromBody] RefreshRequest request)
         {
             try { return Ok(auth.Refresh(request)); }
-            catch (Exception) { throw; }
+            catch (Exception) { return StatusCode(500, "Error ocurred refreshing token"); }
         }
 
     }

@@ -8,6 +8,7 @@ namespace KeycloakIntegration
             IssueDate = DateTime.Now;
         }
 
+        public bool IsSuccessful { get; set; } = true;
         public string? Access_token { get; set; }
         public int Expires_in { get; set; }
         public int Refresh_expires_in { get; set; }

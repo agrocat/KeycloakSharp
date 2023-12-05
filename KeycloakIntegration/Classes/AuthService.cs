@@ -1,5 +1,6 @@
 ﻿using KeycloakIntegration.Classes;
 using RestSharp;
+using System.Security.Cryptography;
 
 namespace KeycloakIntegration
 {
@@ -20,7 +21,7 @@ namespace KeycloakIntegration
         public AuthResponse Refresh(RefreshRequest request)
         {
             try { return Auth(request); }
-            catch (AuthException ex) { throw ex; }
+            catch (AuthException) { throw; }
         }
 
 		public AuthResponse Auth(AuthRequest request)
@@ -45,10 +46,19 @@ namespace KeycloakIntegration
             if (request.RefreshToken != null)
                 httpReq.AddParameter("refresh_token", request.RefreshToken);
 
-            var kcResp = client.Execute<AuthResponse>(httpReq).Data;
-            if (kcResp == null)
-                throw new AuthException(
-                    "Hi ha hagut un problema al contactar amb Keycloak");
+            var resp = client.Execute<AuthResponse>(httpReq);
+
+            var kcResp = resp.Data ?? new();
+            kcResp.IsSuccessful = resp.IsSuccessful;
+
+            if (!kcResp.IsSuccessful)
+            {
+                var msg = "A problem ocurred with Keycloak";
+#if DEBUG
+                msg += $":\n{resp.Content}";
+#endif
+                throw new AuthException(msg, resp.ErrorException);
+            }
 
             return kcResp;
 
