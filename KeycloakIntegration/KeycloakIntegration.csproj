@@ -4,6 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>KeycloakSharp</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>KeycloakSharp</Title>
+    <Description>Seamlessly integrate Keycloak with any .NET Web API for streamlined authentication and authorization. Simplify security workflows with token-based authentication and fine-grained access control. Easy to configure and extend. Open for contributions and feedback.</Description>
+    <Copyright>sergidb</Copyright>
+    <PackageProjectUrl>https://github.com/sergidb/KeycloakSharp</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageId>keycloak-sharp</PackageId>
+    <RepositoryUrl>https://github.com/sergidb/KeycloakSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>keycloak;user management; authorization; authentication; oauth; identity</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +22,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="110.2.0" />
