@@ -12,11 +12,12 @@ namespace KeycloakTester.Controllers
 
         public AuthController(IConfiguration configuration)
         {
-            // Obtenim la configuració del fitxer appsettings.json
+            // Get Keycloak configuration from appsettings.json
             var kcconfig = configuration.GetSection("Keycloak").Get<KeycloakConfig>();
             auth = new(kcconfig);
         }
 
+        [HttpPost("")]
         public ActionResult<AuthResponse> Post([FromForm] string grant_type,
                                                [FromForm] string? username,
                                                [FromForm] string? password,
@@ -42,15 +43,15 @@ namespace KeycloakTester.Controllers
 
         }
 
-        [HttpPost("")]
-        public IActionResult Login(LoginRequest request)
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginRequest request)
         {
             try { return Ok(auth.Login(request)); }
             catch(Exception) { throw; }
         }
 
-        [HttpPost("")]
-        public IActionResult Refresh(RefreshRequest request)
+        [HttpPost("refresh")]
+        public IActionResult Refresh([FromBody] RefreshRequest request)
         {
             try { return Ok(auth.Refresh(request)); }
             catch (Exception) { throw; }
