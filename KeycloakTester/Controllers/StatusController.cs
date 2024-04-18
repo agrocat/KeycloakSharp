@@ -34,7 +34,7 @@ namespace KeycloakTester.Controllers
         }
 
         [Authorize]
-        [AllowRoles("api-clients@veure_albarans","api-clients@veure_factures")]
+        [AllowRoles("client@role1","client@role2")]
         [HttpGet("test-role")]
         public ActionResult<string> GetWithRole()
         {
