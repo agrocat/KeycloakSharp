@@ -17,6 +17,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     options.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateAudience = true,
+        ValidAudience = builder.Configuration["Keycloak:ClientID"],
         NameClaimType = "preferred_username"
     };
 });
