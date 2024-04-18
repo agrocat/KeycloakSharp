@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KeycloakIntegration.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,14 @@ namespace KeycloakTester.Controllers
         public ActionResult<string> GetWithAuthorization()
         {
             return Ok("Authorized ok");
+        }
+
+        [Authorize]
+        [AllowRoles("api-clients@veure_albarans","api-clients@veure_factures")]
+        [HttpGet("test-role")]
+        public ActionResult<string> GetWithRole()
+        {
+            return Ok("Allowed");
         }
     }
 }
